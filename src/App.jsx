@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [videoUrl, setVideoUrl] = useState('')
   const [error, setError] = useState('')
-  const [duration, setDuration] = useState(3)
+  const [duration, setDuration] = useState(8)
 
   const generate = async (e) => {
     e.preventDefault()
@@ -35,8 +35,8 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex items-center justify-center p-6">
       <div className="w-full max-w-3xl rounded-2xl shadow-xl border border-white/60 backdrop-blur bg-white/70">
         <div className="p-8">
-          <h1 className="text-3xl font-bold text-slate-800">Pastel Text → Video</h1>
-          <p className="text-slate-600 mt-1">Type your message and get a short pastel-themed video with a soft fade.</p>
+          <h1 className="text-3xl font-bold text-slate-800">Pastel Text → Animated Video</h1>
+          <p className="text-slate-600 mt-1">Type your message and get an animated pastel video with smooth gradients and word-by-word motion.</p>
 
           <form onSubmit={generate} className="mt-6 space-y-4">
             <textarea
@@ -49,16 +49,18 @@ function App() {
             />
 
             <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <label className="flex items-center gap-3 text-slate-700">
+              <label className="flex items-center gap-3 text-slate-700 w-full sm:w-auto">
                 <span className="text-sm">Duration</span>
                 <input
                   type="range"
                   min="1"
-                  max="10"
+                  max="60"
+                  step="1"
                   value={duration}
                   onChange={(e) => setDuration(Number(e.target.value))}
+                  className="w-full sm:w-64"
                 />
-                <span className="text-sm font-medium">{duration}s</span>
+                <span className="text-sm font-medium whitespace-nowrap">{duration}s</span>
               </label>
 
               <button
@@ -69,6 +71,7 @@ function App() {
                 {loading ? 'Generating…' : 'Generate Video'}
               </button>
             </div>
+            <p className="text-xs text-slate-500">Tip: Longer durations create a slower, more cinematic gradient animation.</p>
           </form>
 
           {error && (
